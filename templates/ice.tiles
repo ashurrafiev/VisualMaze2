@@ -1,0 +1,119 @@
+@size 50
+@image ice.png
+
+# f:forest
+# fh:forest-hill
+# fhh:forest-high-hill
+# hrk:hill-rock
+# o:open
+# w:sea
+# wr: river
+# wr0: river-stream
+# wsh: shore-shallow
+
+o/o/o/o
++2
+f/f/f/f
++3
+f/o/o/o
+f/o/f/o
+f/f/f/o
+
+fh/f/o/f
+fh/f/f/f
+fh/fh/o/f
+fh/fh/f/o
+fh/fh/f/f
+fh/o/o/f
+fh/f/o/o
+fh/f/fh/f
+f/fh/fh/fh
+fh/o/o/o
+
+fhh/f/f/f
+fh/fhh/f/f
+fhh/fhh/fh/f
+fhh/fhh/f/fh
+fhh/fh/f/f
+fhh/fh/f/fh
+fhh/fh/o/fh
+fhh/fh/fh/fh
+hrk/fhh/fh/fhh
+hrk/fhh/hrk/fhh
+
+hrk/fh/f/fh
+hrk/fh/o/fh
+hrk/fh/fh/fh
+hrk/fh/fhh/fh
+fhh/hrk/fh/fh
+hrk/fhh/fh/fh
+fhh/hrk/fh/f
+hrk/fhh/f/fh
+fh/fhh/f/o
+fhh/fh/o/f
+
+wr0/o/o/o
++
+wr0/wr0/o/o
++
+wr0/o/wr0/o
++
+wr0/wr0/wr0/o
++
+wr0/o/f/o
+wr0/o/fh/o
+
+wr0/fh/fh/fh
+wr0/fh/fhh/fh
+wr0/wr0/fh/o
+wr0/wr0/fh/fh
+wr0/wr0/o/fh
+wr0/fh/wr0/fh
+o/wr0/fh/f
+wr0/o/f/fh
+wr/f/f/f
++
+
+wr/wr/f/f
++
+wr/wr/wr/f
+w/wr/wr/wr
+w/w/wr/wr
+w/w/w/wr
+w/w/w/w
+wr/f/o/f
+wr0/wr/f/o
+wr/wr0/o/f
+
+wr/wr0/wr/f
+wr0/wr/wr0/o
+wsh/o/o/o
+wsh/wsh/o/o
++
+wsh/wr0/o/o
+wr0/wsh/o/o
+wr0/wsh/o/wsh
+wsh/wr0/wsh/wr0
+wr0/wsh/wsh/wsh
+
+wsh/wr/f/o
+wr/wsh/o/f
+wr/wsh/o/wsh
+w/wr/wsh/wr
+wsh/wr/wr0/o
+wr/wsh/o/wr0
+wr/wr0/wsh/wr0
+wr/w/wsh/wsh
+w/w/wsh/wsh
+w/wr/wsh/wsh
+
+w/w/w/wsh
+wsh/fh/f/fh
+wsh/fh/fhh/fh
+o/wsh/fh/fh
+wsh/o/fh/fh
+wsh/wsh/fh/o
+wsh/wsh/o/fh
+w/wsh/fh/wsh
+wr/wsh/fh/f
+wsh/wr/f/fh
