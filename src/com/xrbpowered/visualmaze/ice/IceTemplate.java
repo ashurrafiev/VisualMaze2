@@ -11,13 +11,13 @@ import com.xrbpowered.visualmaze.VisualMazePreview;
 
 public class IceTemplate extends ImageTemplate {
 
-	public static final String templatePath = "templates/tiles.txt";
-	public static final int gridSize = 16;
-	public static final String gridEdge = "o";
+	public static final String templatePath = "templates/ice.tiles";
+	public static final int gridSize = 32;
+	public static final String gridEdge = "w";
 
 	public IceTemplate() {
 		fillPattern = FillPattern.quadLoom;
-		generatorAttempts = 10;
+		generatorAttempts = 100;
 	}
 	
 	@Override

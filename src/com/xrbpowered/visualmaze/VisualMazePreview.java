@@ -17,7 +17,7 @@ import com.xrbpowered.zoomui.swing.SwingWindowFactory;
 
 public class VisualMazePreview extends UIElement {
 
-	public static final String templatePath = "templates/tiles.txt";
+	public static final String templatePath = "templates/ice.tiles";
 	
 	private static boolean drawGrid = false;
 

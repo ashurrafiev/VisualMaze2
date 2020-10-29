@@ -117,3 +117,12 @@ wsh/wsh/o/fh
 w/wsh/fh/wsh
 wr/wsh/fh/f
 wsh/wr/f/fh
+
+wsh/wsh/wsh/fh
+wsh/wsh/fh/fh
+w/w/wsh/wr
+w/w/wr/wsh
+wr/w/wsh/wr0
+w/wr/wr0/wsh
+wr0/wsh/fh/wr0
+wsh/wr0/wr0/fh
