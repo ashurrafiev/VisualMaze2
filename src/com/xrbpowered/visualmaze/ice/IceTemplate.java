@@ -6,8 +6,8 @@ import java.util.Random;
 
 import com.xrbpowered.visualmaze.FillPattern;
 import com.xrbpowered.visualmaze.Grid;
-import com.xrbpowered.visualmaze.ImageTemplate;
-import com.xrbpowered.visualmaze.VisualMazePreview;
+import com.xrbpowered.visualmaze.preview.ImageTemplate;
+import com.xrbpowered.visualmaze.preview.VisualMazePreview;
 
 public class IceTemplate extends ImageTemplate {
 
@@ -23,16 +23,7 @@ public class IceTemplate extends ImageTemplate {
 	@Override
 	protected Grid<BufferedImage> createGrid(int width, int height, Random random) {
 		Grid<BufferedImage> grid = new Grid<>(width, height);
-		if(gridEdge!=null) {
-			for(int x=0; x<=width; x++) {
-				grid.fix(x, 0, gridEdge);
-				grid.fix(x, height, gridEdge);
-			}
-			for(int y=0; y<=height; y++) {
-				grid.fix(0, y, gridEdge);
-				grid.fix(width, y, gridEdge);
-			}
-		}
+		grid.fixEdges(gridEdge);
 		return grid;
 	}
 	

@@ -1,5 +1,16 @@
-@size 50
-@image ice.png
+@fillpattern quadLoom
+@attempts 10
+
+# @size 50
+# @image ice.png
+
+@size 16
+@objskip 2
+@scale 10
+@mtl Snow $FFFFFFFF 0.3 10 1
+@mtl Pine $FF559977 0.4 10 0.1
+@mtl Rock $FF7d7A83 0.75 20 0.5
+@objfile ice.obj
 
 # f:forest
 # fh:forest-hill

@@ -83,4 +83,17 @@ public class Grid<R> {
 		return count;
 	}
 
+	public void fixEdges(String c) {
+		if(c!=null) {
+			for(int x=0; x<=width; x++) {
+				fix(x, 0, c);
+				fix(x, height, c);
+			}
+			for(int y=0; y<=height; y++) {
+				fix(0, y, c);
+				fix(width, y, c);
+			}
+		}
+	}
+	
 }

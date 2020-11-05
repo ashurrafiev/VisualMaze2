@@ -1,5 +1,6 @@
 package com.xrbpowered.visualmaze;
 
+import java.awt.Color;
 import java.io.File;
 import java.util.Scanner;
 
@@ -61,6 +62,27 @@ public abstract class TemplateParser<R, T extends Template<R>> {
 			registerResource(keyVariant(key, i), resIndex, i);
 	}
 
+	protected float floatArg(String[] args, int index, float fallbackValue, boolean required) {
+		boolean err = true;
+		if(index<args.length) {
+			try {
+				return Float.parseFloat(args[index]);
+			}
+			catch(NumberFormatException e) {
+			}
+		}
+		else {
+			err = required;
+		}
+		if(err)
+			error("Expected float argument "+index);
+		return fallbackValue;
+	}
+
+	protected float floatArg(String[] args, int index, float fallbackValue) {
+		return floatArg(args, index, fallbackValue, true);
+	}
+
 	protected int intArg(String[] args, int index, int fallbackValue, boolean required) {
 		boolean err = true;
 		if(index<args.length) {
@@ -82,6 +104,38 @@ public abstract class TemplateParser<R, T extends Template<R>> {
 		return intArg(args, index, fallbackValue, true);
 	}
 
+	protected Color colorArg(String[] args, int index, Color fallbackValue, boolean required) {
+		boolean err = true;
+		if(index<args.length || args[index].isEmpty()) {
+			try {
+				if(args[index].startsWith("$")) {
+					return new Color((int)Long.parseLong(args[index].substring(1), 16), args[index].length()>7);
+				}
+				else {
+					String[] s = args[index].split(",", 4);
+					if(s.length>=3) {
+						float[] f = new float[s.length];
+						for(int i=0; i<s.length; i++)
+							f[i] = Float.parseFloat(s[i]);
+						return (s.length==3) ? new Color(f[0], f[1], f[2]) : new Color(f[0], f[1], f[2], f[3]);
+					}
+				}
+			}
+			catch(NumberFormatException e) {
+			}
+		}
+		else {
+			err = required;
+		}
+		if(err)
+			error("Expected color argument "+index);
+		return fallbackValue;
+	}
+	
+	protected Color colorArg(String[] args, int index, Color fallbackValue) {
+		return colorArg(args, index, fallbackValue, true);
+	}
+	
 	protected String stringArg(String[] args, int index, String fallbackValue, boolean required) {
 		boolean err = true;
 		if(index<args.length)
@@ -179,6 +233,9 @@ public abstract class TemplateParser<R, T extends Template<R>> {
 		}
 	}
 	
+	protected void finish() {
+	}
+	
 	public T parse(Scanner in) {
 		if(template!=null || lineNumber!=1)
 			throw new RuntimeException("Parser not reset");
@@ -198,6 +255,7 @@ public abstract class TemplateParser<R, T extends Template<R>> {
 				parseLine(line);
 			lineNumber++;
 		}
+		finish();
 		return template;
 	}
 	

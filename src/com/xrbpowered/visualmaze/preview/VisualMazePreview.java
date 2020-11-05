@@ -1,4 +1,4 @@
-package com.xrbpowered.visualmaze;
+package com.xrbpowered.visualmaze.preview;
 
 import java.awt.Color;
 import java.awt.Rectangle;
@@ -6,6 +6,8 @@ import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 
+import com.xrbpowered.visualmaze.Grid;
+import com.xrbpowered.visualmaze.Tile;
 import com.xrbpowered.zoomui.GraphAssist;
 import com.xrbpowered.zoomui.KeyInputHandler;
 import com.xrbpowered.zoomui.UIContainer;
@@ -49,20 +51,6 @@ public class VisualMazePreview extends UIElement {
 	
 	@Override
 	public void paint(GraphAssist g) {
-		/*List<Tile<BufferedImage>> images = t.index.filter(Template.allKey);
-		int count = images.size();
-		int cols = (int)Math.round(Math.sqrt(count));
-		int rows = (int)Math.ceil(count/(double)cols);
-		int index = 0;
-		for(int y=0; y<rows; y++)
-			for(int x=0; x<cols; x++) {
-				if(index>=count)
-					continue;
-				BufferedImage img = images.get(index).resource;
-				g.graph.drawImage(img, x*t.tileSize, y*t.tileSize, null);
-				index++;
-			}
-		*/
 		if(template==null || grid==null)
 			return;
 		g.pushAntialiasing(false);

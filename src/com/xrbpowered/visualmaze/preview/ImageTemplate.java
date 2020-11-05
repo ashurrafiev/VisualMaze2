@@ -1,4 +1,4 @@
-package com.xrbpowered.visualmaze;
+package com.xrbpowered.visualmaze.preview;
 
 import java.awt.Graphics2D;
 import java.awt.geom.AffineTransform;
@@ -7,6 +7,9 @@ import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
+
+import com.xrbpowered.visualmaze.Template;
+import com.xrbpowered.visualmaze.TemplateParser;
 
 public class ImageTemplate extends Template<BufferedImage> {
 

@@ -1,4 +1,6 @@
 /templates/*.png
+*.blend*
+*.mtl
 
 # Compiled class file
 *.class
