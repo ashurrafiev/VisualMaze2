@@ -6,6 +6,7 @@ public class RenderTileComponent extends InstancedMeshList<TileInstance> {
 
 	public RenderTileComponent() {
 		super(MaterialDefTileShader.instInfo);
+		// culling = false;
 	}
 
 	@Override

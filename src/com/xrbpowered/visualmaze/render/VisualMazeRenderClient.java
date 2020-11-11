@@ -1,6 +1,11 @@
 package com.xrbpowered.visualmaze.render;
 
-import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.opengl.GL11.GL_COLOR_BUFFER_BIT;
+import static org.lwjgl.opengl.GL11.GL_DEPTH_BUFFER_BIT;
+import static org.lwjgl.opengl.GL11.GL_DEPTH_TEST;
+import static org.lwjgl.opengl.GL11.glClear;
+import static org.lwjgl.opengl.GL11.glClearColor;
+import static org.lwjgl.opengl.GL11.glEnable;
 
 import java.awt.event.KeyEvent;
 import java.io.File;
@@ -24,7 +29,7 @@ public class VisualMazeRenderClient extends Client {
 	private CameraActor camera = null; 
 	private Controller controller;
 
-	private RenderTemplate template;
+	private RenderTemplate template = null;
 	
 	public VisualMazeRenderClient(String templateName, RenderTemplate template) {
 		super("VisualMaze2 template preview: "+templateName);
@@ -34,7 +39,8 @@ public class VisualMazeRenderClient extends Client {
 	
 	@Override
 	public void createResources() {
-		glClearColor(0.8f, 0.82f, 0.85f, 1f);
+		super.createResources();
+		glClearColor(0.8f, 0.82f, 0.9f, 1f);
 		
 		camera = new CameraActor.Perspective().setRange(0.5f, 160).setAspectRatio(getFrameWidth(), getFrameHeight());
 		camera.position = new Vector3f(0, 1.75f, 3);
@@ -45,18 +51,46 @@ public class VisualMazeRenderClient extends Client {
 
 		shader = new MaterialDefTileShader();
 		shader.setCamera(camera);
+
+		reloadTemplate();
+	}
+	
+	public void reloadTemplate() {
+		if(template!=null)
+			template.renderer.releaseResources();
 		template = new RenderTemplate.Parser(shader, "in_Material").parse(new File(templatePath));
-		
+		generate();
+	}
+	
+	public void generate() {
+		template.renderer.releaseInstances();
 		Grid<RenderTemplate.RotatedComponent> grid = template.generateGrid(gridSize, gridSize, System.currentTimeMillis());
 		template.renderer.createInstances(grid);
-		
-		super.createResources();
+	}
+	
+	@Override
+	public void mouseDown(float x, float y, int button) {
+		if(!controller.isMouseLook())
+			controller.setMouseLook(true);
 	}
 	
 	@Override
 	public void keyPressed(char c, int code) {
-		if(code==KeyEvent.VK_ESCAPE)
-			requestExit();
+		switch(code) {
+			case KeyEvent.VK_ESCAPE:
+				requestExit();
+				return;
+			case KeyEvent.VK_ALT: 
+				if(controller.isMouseLook())
+					controller.setMouseLook(false);
+				return;
+			case KeyEvent.VK_F5:
+				reloadTemplate();
+				return;
+			case KeyEvent.VK_ENTER:
+				generate();
+				return;
+		}
 	}
 	
 	@Override

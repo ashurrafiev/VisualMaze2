@@ -11,11 +11,13 @@ uniform sampler2D texMaterialDef;
 
 uniform vec3 lightDirection = vec3(0.5, -0.65, -0.5);
 uniform vec4 lightColor = vec4(1, 0.95, 0.85, 1);
-uniform vec4 ambientColor = vec4(0.0, 0.2, 0.5, 1);
+uniform vec4 midColor = vec4(0.3, 0.45, 0.8, 1);
+uniform vec4 shadowColor = vec4(0.25, 0.35, 0.6, 1);
 
 uniform float fogNear = 16;
 uniform float fogFar = 160;
-uniform vec4 fogColor = vec4(0.8, 0.82, 0.85, 0);
+uniform vec4 bgColor = vec4(0.8, 0.82, 0.9, 0);
+uniform float fogShadow = 0; // 0.75;
 
 in vec4 pass_Position;
 in vec3 pass_Normal;
@@ -39,13 +41,15 @@ void main(void) {
 	vec3 viewDir = normalize(-pass_Position.xyz);
 	
 	vec3 lightDir = normalize((viewMatrix * vec4(-lightDirection, 0)).xyz);
-	float diffuse = max(dot(normal, lightDir), 0);
+	float diffuse = dot(normal, lightDir);
+	vec4 diffuseLight = diffuse>=0 ? mix(midColor, lightColor, diffuse) : mix(midColor, shadowColor, -diffuse);
 	float spec = pow(max(dot(viewDir, normalize(reflect(-lightDir, normal))), 0), specPower);
 	
-	out_Color = diffuseColor * mix(ambientColor, lightColor, diffuse) + specColor * lightColor * spec;
+	out_Color = diffuseColor * diffuseLight + specColor * lightColor * spec;
 	out_Color.a = diffuseColor.a; // + spec * specColor.r;
 	
 	if(fogFar>0 && fogFar>fogNear) {
+		vec4 fogColor = mix(bgColor, shadowColor, fogShadow);
 		out_Color = mix(out_Color, fogColor, clamp((viewDist - fogNear) / (fogFar - fogNear), 0, 1));
 	}
 }
