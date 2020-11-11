@@ -1,10 +1,12 @@
 @fillpattern quadLoom
 @attempts 10
+@gridsize 32
+@gridedge o
 
-# @size 50
-# @image ice.png
+@imgsize 50
+@image ice.png
 
-@size 16
+@objsize 16
 @objskip 2
 @scale 10
 @mtl Snow $FFFFFFFF 0.3 10 1
@@ -40,6 +42,8 @@ fh/f/o/o
 fh/f/fh/f
 f/fh/fh/fh
 fh/o/o/o
+
+@stop
 
 fhh/f/f/f
 fh/fhh/f/f

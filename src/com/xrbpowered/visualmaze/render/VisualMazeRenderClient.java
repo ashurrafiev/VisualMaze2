@@ -22,7 +22,6 @@ import com.xrbpowered.visualmaze.Grid;
 public class VisualMazeRenderClient extends Client {
 
 	public static final String templatePath = "templates/ice.tiles";
-	public static final int gridSize = 32;
 	
 	private MaterialDefTileShader shader;
 
@@ -64,7 +63,7 @@ public class VisualMazeRenderClient extends Client {
 	
 	public void generate() {
 		template.renderer.releaseInstances();
-		Grid<RenderTemplate.RotatedComponent> grid = template.generateGrid(gridSize, gridSize, System.currentTimeMillis());
+		Grid<RenderTemplate.RotatedComponent> grid = template.generateGrid(System.currentTimeMillis());
 		template.renderer.createInstances(grid);
 	}
 	

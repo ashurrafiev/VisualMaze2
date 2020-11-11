@@ -10,9 +10,13 @@ public abstract class Template<R> {
 	
 	public FillPattern fillPattern = FillPattern.basics[0];
 	public int generatorAttempts = 1;
+	public int gridSize = 16;
+	public String gridEdge = null;
 	
 	protected Grid<R> createGrid(int width, int height, Random random) {
-		return new Grid<>(width, height);
+		Grid<R> grid = new Grid<>(width, height);
+		grid.fixEdges(gridEdge);
+		return grid;
 	}
 	
 	protected Generator<R> createGenerator() {
@@ -23,6 +27,10 @@ public abstract class Template<R> {
 
 	public Grid<R> generateGrid(int width, int height, long seed) {
 		return generateGrid(width, height, new Random(seed));
+	}
+	
+	public Grid<R> generateGrid(long seed) {
+		return generateGrid(gridSize, gridSize, seed);
 	}
 
 	public Grid<R> generateGrid(int width, int height, Random random) {

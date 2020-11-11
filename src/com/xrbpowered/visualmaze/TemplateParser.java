@@ -180,7 +180,16 @@ public abstract class TemplateParser<R, T extends Template<R>> {
 		}
 
 		else if(args[0].equals("@attempts"))
-			template.generatorAttempts = Integer.parseInt(args[1]);
+			template.generatorAttempts = intArg(args, 1, 1);
+		
+		else if(args[0].equals("@gridsize"))
+			template.gridSize = intArg(args, 1, 16);
+		
+		else if(args[0].equals("@gridedge")) {
+			template.gridEdge = stringArg(args, 1, null, false);
+			if("*".equals(template.gridEdge))
+				template.gridEdge = null;
+		}
 		
 		else
 			warn("Unknown command, ignored: "+args[0]);

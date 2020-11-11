@@ -73,7 +73,7 @@ public class ImageTemplate extends Template<BufferedImage> {
 		
 		@Override
 		protected void command(String[] args) {
-			if(args[0].equals("@size")) {
+			if(args[0].equals("@imgsize")) {
 				if(template.tileSize>0)
 					error("Cannot change tile size");
 				else

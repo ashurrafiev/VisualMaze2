@@ -25,9 +25,8 @@ public class VisualMazePreview extends UIElement {
 
 	private ImageTemplate template = null;
 	private Grid<BufferedImage> grid = null;
-	public int gridWidth, gridHeight;
 	
-	public VisualMazePreview(UIContainer parent, ImageTemplate template, int gridWidth, int gridHeight) {
+	public VisualMazePreview(UIContainer parent, ImageTemplate template) {
 		super(new UIPanView(parent) {
 			@Override
 			protected void paintSelf(GraphAssist g) {
@@ -35,8 +34,6 @@ public class VisualMazePreview extends UIElement {
 			}
 		});
 		this.template = template;
-		this.gridWidth = gridWidth;
-		this.gridHeight = gridHeight;
 	}
 	
 	@Override
@@ -83,7 +80,7 @@ public class VisualMazePreview extends UIElement {
 	public boolean onMouseDown(float x, float y, Button button, int mods) {
 		if(button==Button.left) {
 			if(template!=null)
-				grid = template.generateGrid(gridWidth, gridHeight, System.currentTimeMillis());
+				grid = template.generateGrid(System.currentTimeMillis());
 			repaint();
 			return true;
 		}
@@ -115,11 +112,11 @@ public class VisualMazePreview extends UIElement {
 		}
 	}
 
-	public static SwingFrame startFrame(String templateName, ImageTemplate template, int gridWidth, int gridHeight) {
+	public static SwingFrame startFrame(String templateName, ImageTemplate template) {
 		SwingFrame frame = new SwingFrame(SwingWindowFactory.use(1), "VisualMaze2 template preview: "+templateName,
-				gridWidth*template.tileSize, gridHeight*template.tileSize, true, false) {};
+				template.gridSize*template.tileSize, template.gridSize*template.tileSize, true, false) {};
 		UIContainer hotkeys = new HotkeyPane(frame.getContainer());
-		new VisualMazePreview(hotkeys, template, gridWidth, gridHeight);
+		new VisualMazePreview(hotkeys, template);
 		frame.show();
 		return frame;
 	}
@@ -128,7 +125,7 @@ public class VisualMazePreview extends UIElement {
 		File file = new File(templatePath);
 		ImageTemplate template = new ImageTemplate.Parser(true).parse(file);
 		System.out.println("Corner types = "+template.listCornerTypesAsString());
-		startFrame(file.getName(), template, 32, 32);
+		startFrame(file.getName(), template);
 	}
 
 

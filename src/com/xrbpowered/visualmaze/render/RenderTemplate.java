@@ -93,7 +93,7 @@ public class RenderTemplate extends Template<RenderTemplate.RotatedComponent> {
 		
 		@Override
 		protected void command(String[] args) {
-			if(args[0].equals("@size")) {
+			if(args[0].equals("@objsize")) {
 				if(template.renderer.tileSize>0)
 					error("Cannot change tile size");
 				else
