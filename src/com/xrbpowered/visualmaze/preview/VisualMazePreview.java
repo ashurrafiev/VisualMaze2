@@ -1,7 +1,9 @@
 package com.xrbpowered.visualmaze.preview;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Rectangle;
+import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -34,6 +36,7 @@ public class VisualMazePreview extends UIElement {
 			}
 		});
 		this.template = template;
+		generate();
 	}
 	
 	@Override
@@ -76,11 +79,15 @@ public class VisualMazePreview extends UIElement {
 		g.popAntialiasing();
 	}
 	
+	public void generate() {
+		if(template!=null)
+			grid = template.generateGrid(System.currentTimeMillis());
+	}
+	
 	@Override
 	public boolean onMouseDown(float x, float y, Button button, int mods) {
 		if(button==Button.left) {
-			if(template!=null)
-				grid = template.generateGrid(System.currentTimeMillis());
+			generate();
 			repaint();
 			return true;
 		}
@@ -113,8 +120,11 @@ public class VisualMazePreview extends UIElement {
 	}
 
 	public static SwingFrame startFrame(String templateName, ImageTemplate template) {
+		Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 		SwingFrame frame = new SwingFrame(SwingWindowFactory.use(1), "VisualMaze2 template preview: "+templateName,
-				template.gridSize*template.tileSize, template.gridSize*template.tileSize, true, false) {};
+				Math.min(screenSize.width, template.gridSize*template.tileSize),
+				Math.min(screenSize.height, template.gridSize*template.tileSize),
+				true, false) {};
 		UIContainer hotkeys = new HotkeyPane(frame.getContainer());
 		new VisualMazePreview(hotkeys, template);
 		frame.show();

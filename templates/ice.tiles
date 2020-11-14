@@ -6,6 +6,10 @@
 @imgsize 50
 @image ice.png
 
+@env:lightdir 0.5 -0.65 -0.5
+@env:colors $FFF2D9 $4D73CC $405999
+@env:fog $CCD1E6 40 160 0
+
 @objsize 16
 @objskip 2
 @scale 10

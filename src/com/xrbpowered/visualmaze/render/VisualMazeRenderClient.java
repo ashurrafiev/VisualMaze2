@@ -1,11 +1,6 @@
 package com.xrbpowered.visualmaze.render;
 
-import static org.lwjgl.opengl.GL11.GL_COLOR_BUFFER_BIT;
-import static org.lwjgl.opengl.GL11.GL_DEPTH_BUFFER_BIT;
-import static org.lwjgl.opengl.GL11.GL_DEPTH_TEST;
-import static org.lwjgl.opengl.GL11.glClear;
-import static org.lwjgl.opengl.GL11.glClearColor;
-import static org.lwjgl.opengl.GL11.glEnable;
+import static org.lwjgl.opengl.GL11.*;
 
 import java.awt.event.KeyEvent;
 import java.io.File;
@@ -14,7 +9,7 @@ import org.joml.Vector3f;
 
 import com.xrbpowered.gl.client.Client;
 import com.xrbpowered.gl.res.asset.AssetManager;
-import com.xrbpowered.gl.res.asset.FileAssetManager;
+import com.xrbpowered.gl.res.asset.CPAssetManager;
 import com.xrbpowered.gl.scene.CameraActor;
 import com.xrbpowered.gl.scene.Controller;
 import com.xrbpowered.visualmaze.Grid;
@@ -33,13 +28,13 @@ public class VisualMazeRenderClient extends Client {
 	public VisualMazeRenderClient(String templateName, RenderTemplate template) {
 		super("VisualMaze2 template preview: "+templateName);
 		multisample = 2;
-		AssetManager.defaultAssets = new FileAssetManager("assets", AssetManager.defaultAssets);
+		AssetManager.defaultAssets = new CPAssetManager("assets", AssetManager.defaultAssets);
 	}
 	
 	@Override
 	public void createResources() {
 		super.createResources();
-		glClearColor(0.8f, 0.82f, 0.9f, 1f);
+		glClearColor(0.93f, 0.93f, 0.93f, 1f);
 		
 		camera = new CameraActor.Perspective().setRange(0.5f, 160).setAspectRatio(getFrameWidth(), getFrameHeight());
 		controller = new Controller(input).setActor(camera);

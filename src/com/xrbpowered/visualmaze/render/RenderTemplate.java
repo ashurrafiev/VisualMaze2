@@ -5,6 +5,8 @@ import java.io.File;
 import java.util.HashMap;
 import java.util.Scanner;
 
+import org.joml.Vector3f;
+
 import com.xrbpowered.gl.res.mesh.AdvancedMeshBuilder;
 import com.xrbpowered.gl.res.mesh.StaticMesh;
 import com.xrbpowered.gl.res.shader.VertexInfo;
@@ -93,9 +95,17 @@ public class RenderTemplate extends Template<RenderTemplate.RotatedComponent> {
 				super.registerResourceVariants(key, resIndex);
 		}
 		
+		protected Vector3f vec3Arg(String[] args, int index, float defx, float defy, float defz) {
+			float x = floatArg(args, index, defx, true);
+			float y = floatArg(args, index+1, defy, true);
+			float z = floatArg(args, index+2, defz, true);
+			return new Vector3f(x, y, z);
+		}
+		
 		@Override
 		protected void command(String[] args) {
 			if(args[0].equals("@objsize")) {
+				// @objsize float
 				if(template.renderer.tileSize>0)
 					error("Cannot change tile size");
 				else
@@ -103,14 +113,17 @@ public class RenderTemplate extends Template<RenderTemplate.RotatedComponent> {
 			}
 			
 			else if(args[0].equals("@objskip")) {
+				// @objskip float
 				tileSkip = floatArg(args, 1, 0);
 			}
 
 			else if(args[0].equals("@scale")) {
+				// @scale float
 				scale = floatArg(args, 1, 1f);
 			}
 
 			else if(args[0].equals("@mtl")) {
+				// @mtl str:name [color:diffuse] [float:specIntensity] [int:specPower] [float:specWhite]
 				String name = stringArg(args, 1, null);
 				Color diffuse = colorArg(args, 2, Color.WHITE, false);
 				float specIntensity = floatArg(args, 3, 0f, false);
@@ -120,6 +133,8 @@ public class RenderTemplate extends Template<RenderTemplate.RotatedComponent> {
 			}
 			
 			else if(args[0].equals("@bordermesh")) {
+				// @bordermesh [none]
+				// @bordermesh str:material [float:y]
 				String mtl = stringArg(args, 1, null, false);
 				if(mtl==null || mtl.equals("none")) {
 					template.borderMesh.reset();
@@ -137,6 +152,7 @@ public class RenderTemplate extends Template<RenderTemplate.RotatedComponent> {
 			}
 
 			else if(args[0].equals("@objfile")) {
+				// @objfile str
 				if(tileSkip<=0)
 					error("OBJ skip is not set");
 				if(materials==null || materials.materialNames.isEmpty()) {
@@ -158,6 +174,33 @@ public class RenderTemplate extends Template<RenderTemplate.RotatedComponent> {
 					if(builders==null)
 						error("Cannot load "+filename);
 				}
+			}
+			
+			else if(args[0].startsWith("@env:")) {
+				if(args[0].equals("@env:lightdir")) {
+					// @env:lightdir float:x float:y float:z
+					shader.setEnvLightDir(vec3Arg(args, 1, 0.5f, -0.5f, -0.5f));
+				}
+				
+				else if(args[0].equals("@env:colors")) {
+					// @env:colors [color:light] [color:mid] [color:shadow]
+					Color light = colorArg(args, 1, Color.WHITE, false);
+					Color mid = colorArg(args, 2, new Color(0x777777), false);
+					Color shadow = colorArg(args, 3, Color.BLACK, false);
+					shader.setEnvColors(light, mid, shadow);
+				}
+
+				else if(args[0].equals("@env:fog")) {
+					// @env:fog [color] [float:near] [float:far] [float:shadow]
+					Color bgColor = colorArg(args, 1, new Color(0xeeeeee), false);
+					float near = floatArg(args, 2, 0, false);
+					float far = floatArg(args, 3, 160, false);
+					float shadow = floatArg(args, 4, 0, false);
+					shader.setEnvFog(bgColor, near, far, shadow);
+				}
+
+				else
+					warnUnknownCommand(args[0]);
 			}
 			
 			else

@@ -7,6 +7,7 @@ import java.util.Scanner;
 public abstract class TemplateParser<R, T extends Template<R>> {
 
 	public static boolean debugRegisterResource = false;
+	public static boolean warnUnknownCommand = true;
 	
 	protected T template = null;
 	
@@ -22,6 +23,11 @@ public abstract class TemplateParser<R, T extends Template<R>> {
 	
 	protected void warn(String s) {
 		System.err.printf("Warning[%d]: %s\n", lineNumber, s);
+	}
+	
+	protected void warnUnknownCommand(String cmd) {
+		if(warnUnknownCommand)
+			warn("Unknown command, ignored: "+cmd);
 	}
 	
 	protected void error(String s) {
@@ -82,7 +88,7 @@ public abstract class TemplateParser<R, T extends Template<R>> {
 	protected float floatArg(String[] args, int index, float fallbackValue) {
 		return floatArg(args, index, fallbackValue, true);
 	}
-
+	
 	protected int intArg(String[] args, int index, int fallbackValue, boolean required) {
 		boolean err = true;
 		if(index<args.length) {
@@ -192,7 +198,7 @@ public abstract class TemplateParser<R, T extends Template<R>> {
 		}
 		
 		else
-			warn("Unknown command, ignored: "+args[0]);
+			warnUnknownCommand(args[0]);
 	}
 	
 	protected String[] parseKey(String line) {
