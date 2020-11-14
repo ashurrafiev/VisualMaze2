@@ -42,7 +42,7 @@ public class VisualMazeRenderClient extends Client {
 		glClearColor(0.8f, 0.82f, 0.9f, 1f);
 		
 		camera = new CameraActor.Perspective().setRange(0.5f, 160).setAspectRatio(getFrameWidth(), getFrameHeight());
-		camera.position = new Vector3f(0, 1.75f, 3);
+		camera.position = new Vector3f(0, 25f, 0);
 		camera.updateTransform();
 		controller = new Controller(input).setActor(camera);
 		controller.moveSpeed = 16;

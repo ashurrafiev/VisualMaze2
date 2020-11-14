@@ -14,7 +14,7 @@ uniform vec4 lightColor = vec4(1, 0.95, 0.85, 1);
 uniform vec4 midColor = vec4(0.3, 0.45, 0.8, 1);
 uniform vec4 shadowColor = vec4(0.25, 0.35, 0.6, 1);
 
-uniform float fogNear = 16;
+uniform float fogNear = 40;
 uniform float fogFar = 160;
 uniform vec4 bgColor = vec4(0.8, 0.82, 0.9, 0);
 uniform float fogShadow = 0; // 0.75;
