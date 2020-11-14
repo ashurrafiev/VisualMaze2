@@ -13,7 +13,9 @@
 @mtl Pine $FF559977 0.4 10 0.1
 @mtl Rock $FF7d7A83 0.75 20 0.5
 @mtl Shore $FFCCDDF5 0.3 10 1
-@mtl Water $FF779DDD 0.5 20 1
+@mtl Water $FF779DDD 0.55 20 1
+@mtl DeepWater $FF5585CC 0.55 20 1
+@bordermesh Snow 0
 @objfile ice.obj
 
 # f:forest

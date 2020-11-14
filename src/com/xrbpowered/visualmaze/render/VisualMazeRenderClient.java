@@ -42,8 +42,6 @@ public class VisualMazeRenderClient extends Client {
 		glClearColor(0.8f, 0.82f, 0.9f, 1f);
 		
 		camera = new CameraActor.Perspective().setRange(0.5f, 160).setAspectRatio(getFrameWidth(), getFrameHeight());
-		camera.position = new Vector3f(0, 25f, 0);
-		camera.updateTransform();
 		controller = new Controller(input).setActor(camera);
 		controller.moveSpeed = 16;
 		controller.setMouseLook(true);
@@ -58,6 +56,7 @@ public class VisualMazeRenderClient extends Client {
 		if(template!=null)
 			template.renderer.releaseResources();
 		template = new RenderTemplate.Parser(shader, "in_Material").parse(new File(templatePath));
+		template.borderMesh.create();
 		generate();
 	}
 	
@@ -65,6 +64,10 @@ public class VisualMazeRenderClient extends Client {
 		template.renderer.releaseInstances();
 		Grid<RenderTemplate.RotatedComponent> grid = template.generateGrid(System.currentTimeMillis());
 		template.renderer.createInstances(grid);
+		
+		camera.position = new Vector3f(0, 25f, 0);
+		camera.rotation.y = -(float)Math.PI*0.75f;
+		camera.updateTransform();
 	}
 	
 	@Override
@@ -104,6 +107,7 @@ public class VisualMazeRenderClient extends Client {
 		glEnable(GL_DEPTH_TEST);
 		
 		template.renderer.drawInstances();
+		template.borderMesh.draw();
 	}
 
 	public static void main(String[] args) {

@@ -48,8 +48,8 @@ public class TileRenderer extends ComponentRenderer<RenderTileComponent> {
 				if(tile!=null) {
 					RenderTileComponent comp = tile.resource.comp;
 					TileInstance obj = new TileInstance();
-					obj.x = (x-grid.width/2)*tileSize;
-					obj.z = (y-grid.height/2)*tileSize;
+					obj.x = x*tileSize;
+					obj.z = y*tileSize;
 					obj.rotate = tile.resource.rotate*(float)Math.PI/2;
 					comp.addInstance(obj);
 				}

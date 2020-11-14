@@ -24,9 +24,11 @@ public class RenderTemplate extends Template<RenderTemplate.RotatedComponent> {
 	}
 	
 	public final TileRenderer renderer;
+	public final BorderMesh borderMesh;
 	
 	public RenderTemplate(MaterialDefTileShader shader) {
 		this.renderer = new TileRenderer(shader);
+		this.borderMesh = new BorderMesh(this, shader);
 	}
 	
 	public static class Parser extends TemplateParser<RotatedComponent, RenderTemplate> {
@@ -115,6 +117,23 @@ public class RenderTemplate extends Template<RenderTemplate.RotatedComponent> {
 				int specPower = intArg(args, 4, 10, false);
 				float specWhite = floatArg(args, 5, 1f, false);
 				materials.add(name, diffuse, specIntensity, specPower, specWhite);
+			}
+			
+			else if(args[0].equals("@bordermesh")) {
+				String mtl = stringArg(args, 1, null, false);
+				if(mtl==null || mtl.equals("none")) {
+					template.borderMesh.reset();
+				}
+				else {
+					int materialId = materials.materialNames.indexOf(mtl);
+					if(materialId>=0) {
+						float y = floatArg(args, 2, 0f, false);
+						template.borderMesh.set(materialId, y);
+					}
+					else {
+						error("Unknown material: "+mtl);
+					}
+				}
 			}
 
 			else if(args[0].equals("@objfile")) {
