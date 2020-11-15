@@ -10,6 +10,7 @@ import java.io.File;
 
 import com.xrbpowered.visualmaze.Grid;
 import com.xrbpowered.visualmaze.Tile;
+import com.xrbpowered.visualmaze.VisualMaze;
 import com.xrbpowered.zoomui.GraphAssist;
 import com.xrbpowered.zoomui.KeyInputHandler;
 import com.xrbpowered.zoomui.UIContainer;
@@ -21,8 +22,6 @@ import com.xrbpowered.zoomui.swing.SwingWindowFactory;
 
 public class VisualMazePreview extends UIElement {
 
-	public static final String templatePath = "templates/ice.tiles";
-	
 	private static boolean drawGrid = false;
 
 	private ImageTemplate template = null;
@@ -131,11 +130,15 @@ public class VisualMazePreview extends UIElement {
 		return frame;
 	}
 	
-	public static void main(String[] args) {
+	public static SwingFrame startFrame(String templatePath) {
 		File file = new File(templatePath);
 		ImageTemplate template = new ImageTemplate.Parser(true).parse(file);
 		System.out.println("Corner types = "+template.listCornerTypesAsString());
-		startFrame(file.getName(), template);
+		return startFrame(file.getName(), template);
+	}
+	
+	public static void main(String[] args) {
+		startFrame(VisualMaze.defaultTemplate);
 	}
 
 

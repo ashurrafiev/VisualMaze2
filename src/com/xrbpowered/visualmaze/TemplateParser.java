@@ -7,7 +7,7 @@ import java.util.Scanner;
 public abstract class TemplateParser<R, T extends Template<R>> {
 
 	public static boolean debugRegisterResource = false;
-	public static boolean warnUnknownCommand = true;
+	public static boolean warnUnknownCommand = false;
 	
 	protected T template = null;
 	

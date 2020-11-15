@@ -13,10 +13,11 @@ import com.xrbpowered.gl.res.asset.CPAssetManager;
 import com.xrbpowered.gl.scene.CameraActor;
 import com.xrbpowered.gl.scene.Controller;
 import com.xrbpowered.visualmaze.Grid;
+import com.xrbpowered.visualmaze.VisualMaze;
 
 public class VisualMazeRenderClient extends Client {
 
-	public static final String templatePath = "templates/ice.tiles";
+	public String templatePath;
 	
 	private MaterialDefTileShader shader;
 
@@ -25,10 +26,15 @@ public class VisualMazeRenderClient extends Client {
 
 	private RenderTemplate template = null;
 	
-	public VisualMazeRenderClient(String templateName, RenderTemplate template) {
+	public VisualMazeRenderClient(String templateName, String templatePath) {
 		super("VisualMaze2 template preview: "+templateName);
+		this.templatePath = templatePath;
 		multisample = 2;
 		AssetManager.defaultAssets = new CPAssetManager("assets", AssetManager.defaultAssets);
+	}
+	
+	public VisualMazeRenderClient(String templatePath) {
+		this(new File(templatePath).getName(), templatePath);
 	}
 	
 	@Override
@@ -106,7 +112,7 @@ public class VisualMazeRenderClient extends Client {
 	}
 
 	public static void main(String[] args) {
-		new VisualMazeRenderClient(new File(templatePath).getName(), null).run();
+		new VisualMazeRenderClient(VisualMaze.defaultTemplate).run();
 	}
 
 }

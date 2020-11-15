@@ -1,7 +1,16 @@
 @fillpattern quadLoom
 @attempts 10
 @gridsize 32
-@gridedge o
+
+# f:forest
+# fh:forest-hill
+# fhh:forest-high-hill
+# hrk:hill-rock
+# o:open
+# w:sea
+# wr: river
+# wr0: river-stream
+# wsh: shore-shallow
 
 @imgsize 50
 @image ice.png
@@ -19,18 +28,13 @@
 @mtl Shore $FFCCDDF5 0.3 10 1
 @mtl Water $FF779DDD 0.55 20 1
 @mtl DeepWater $FF5585CC 0.55 20 1
-@bordermesh Snow 0
-@objfile ice.obj
 
-# f:forest
-# fh:forest-hill
-# fhh:forest-high-hill
-# hrk:hill-rock
-# o:open
-# w:sea
-# wr: river
-# wr0: river-stream
-# wsh: shore-shallow
+@gridedge o
+@bordermesh Snow 0
+# @gridedge wr
+# @bordermesh Water -1
+
+@objfile ice.obj
 
 o/o/o/o
 +2
@@ -108,6 +112,7 @@ wr/wr0/o/f
 
 wr/wr0/wr/f
 wr0/wr/wr0/o
+@stop
 wsh/o/o/o
 wsh/wsh/o/o
 +
