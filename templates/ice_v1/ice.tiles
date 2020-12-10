@@ -1,0 +1,154 @@
+@fillpattern quadLoom
+@attempts 10
+@gridsize 32
+
+# f:forest
+# fh:forest-hill
+# fhh:forest-high-hill
+# hrk:hill-rock
+# o:open
+# w:sea
+# wr: river
+# wr0: river-stream
+# wsh: shore-shallow
+
+@imgsize 50
+@image ice.png
+
+@env:lightdir 0.5 -0.65 -0.5
+@env:colors $FFF2D9 $4D73CC $405999
+@env:fog $CCD1E6 40 160 0
+
+@objsize 16
+@objskip 2
+@scale 10
+@mtl Snow $FFFFFFFF 0.3 10 1
+@mtl Pine $FF559977 0.4 10 0.1
+@mtl Rock $FF7d7A83 0.75 20 0.5
+@mtl Shore $FFCCDDF5 0.3 10 1
+@mtl Water $FF779DDD 0.55 20 1
+@mtl DeepWater $FF5585CC 0.55 20 1
+
+@gridedge o
+@bordermesh Snow 0
+# @gridedge wr
+# @bordermesh Water -1
+
+@objfile ice.obj
+
+o/o/o/o
++2
+f/f/f/f
++3
+f/o/o/o
+f/o/f/o
+f/f/f/o
+
+fh/f/o/f
+fh/f/f/f
+fh/fh/o/f
+fh/fh/f/o
+fh/fh/f/f
+fh/o/o/f
+fh/f/o/o
+fh/f/fh/f
+f/fh/fh/fh
+fh/o/o/o
+
+fhh/f/f/f
+fh/fhh/f/f
+fhh/fhh/fh/f
+fhh/fhh/f/fh
+fhh/fh/f/f
+fhh/fh/f/fh
+fhh/fh/o/fh
+fhh/fh/fh/fh
+hrk/fhh/fh/fhh
+hrk/fhh/hrk/fhh
+
+hrk/fh/f/fh
+hrk/fh/o/fh
+hrk/fh/fh/fh
+hrk/fh/fhh/fh
+fhh/hrk/fh/fh
+hrk/fhh/fh/fh
+fhh/hrk/fh/f
+hrk/fhh/f/fh
+fh/fhh/f/o
+fhh/fh/o/f
+
+wr0/o/o/o
++
+wr0/wr0/o/o
++
+wr0/o/wr0/o
++
+wr0/wr0/wr0/o
++
+wr0/o/f/o
+wr0/o/fh/o
+
+wr0/fh/fh/fh
+wr0/fh/fhh/fh
+wr0/wr0/fh/o
+wr0/wr0/fh/fh
+wr0/wr0/o/fh
+wr0/fh/wr0/fh
+o/wr0/fh/f
+wr0/o/f/fh
+wr/f/f/f
++
+
+wr/wr/f/f
++
+wr/wr/wr/f
+w/wr/wr/wr
+w/w/wr/wr
+w/w/w/wr
+w/w/w/w
+wr/f/o/f
+wr0/wr/f/o
+wr/wr0/o/f
+
+wr/wr0/wr/f
+wr0/wr/wr0/o
+@stop
+wsh/o/o/o
+wsh/wsh/o/o
++
+wsh/wr0/o/o
+wr0/wsh/o/o
+wr0/wsh/o/wsh
+wsh/wr0/wsh/wr0
+wr0/wsh/wsh/wsh
+
+wsh/wr/f/o
+wr/wsh/o/f
+wr/wsh/o/wsh
+w/wr/wsh/wr
+wsh/wr/wr0/o
+wr/wsh/o/wr0
+wr/wr0/wsh/wr0
+wr/w/wsh/wsh
+w/w/wsh/wsh
+w/wr/wsh/wsh
+
+w/w/w/wsh
+wsh/fh/f/fh
+wsh/fh/fhh/fh
+o/wsh/fh/fh
+wsh/o/fh/fh
+wsh/wsh/fh/o
+wsh/wsh/o/fh
+w/wsh/fh/wsh
+wr/wsh/fh/f
+wsh/wr/f/fh
+
+wsh/wsh/wsh/fh
+wsh/wsh/fh/fh
+w/w/wsh/wr
+w/w/wr/wsh
+wr/w/wsh/wr0
+w/wr/wr0/wsh
+wr0/wsh/fh/wr0
+wsh/wr0/wr0/fh

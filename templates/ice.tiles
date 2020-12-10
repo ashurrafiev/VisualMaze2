@@ -10,7 +10,6 @@
 # w:sea
 # wr: river
 # wr0: river-stream
-# wsh: shore-shallow
 
 @imgsize 50
 @image ice.png
@@ -29,10 +28,10 @@
 @mtl Water $FF779DDD 0.55 20 1
 @mtl DeepWater $FF5585CC 0.55 20 1
 
-@gridedge o
-@bordermesh Snow 0
-# @gridedge wr
-# @bordermesh Water -1
+# @gridedge o
+# @bordermesh Snow 0
+@gridedge w
+@bordermesh DeepWater -1
 
 @objfile ice.obj
 
@@ -112,43 +111,49 @@ wr/wr0/o/f
 
 wr/wr0/wr/f
 wr0/wr/wr0/o
-@stop
-wsh/o/o/o
-wsh/wsh/o/o
+wr/wr0/fh/f
+wr0/wr/f/fh
+w/wr/wr0/wr
+wr/wr/fh/f
+wr/wr/fh/fh
 +
-wsh/wr0/o/o
-wr0/wsh/o/o
-wr0/wsh/o/wsh
-wsh/wr0/wsh/wr0
-wr0/wsh/wsh/wsh
+wr/wr/f/fh
+wr/fh/f/fh
 
-wsh/wr/f/o
-wr/wsh/o/f
-wr/wsh/o/wsh
-w/wr/wsh/wr
-wsh/wr/wr0/o
-wr/wsh/o/wr0
-wr/wr0/wsh/wr0
-wr/w/wsh/wsh
-w/w/wsh/wsh
-w/wr/wsh/wsh
+wr/fh/fh/fh
+wr/fh/wr0/fh
+wr/wr/wr/fh
+wr/w/wr/fh
+wr/wr0/fh/fh
+wr0/wr/fh/fh
+wr/wr0/o/fh
+wr0/wr/fh/o
+wr/w/wr/f
 
-w/w/w/wsh
-wsh/fh/f/fh
-wsh/fh/fhh/fh
-o/wsh/fh/fh
-wsh/o/fh/fh
-wsh/wsh/fh/o
-wsh/wsh/o/fh
-w/wsh/fh/wsh
-wr/wsh/fh/f
-wsh/wr/f/fh
+wr/o/o/o
+wr/wr/o/o
++
+wr/wr0/o/o
+wr0/wr/o/o
+wr/wr/f/o
+wr/wr/o/f
+o/wr/f/o
+wr/o/o/f
+wr/o/wr0/o
+wr/w/wr/o
 
-wsh/wsh/wsh/fh
-wsh/wsh/fh/fh
-w/w/wsh/wr
-w/w/wr/wsh
-wr/w/wsh/wr0
-w/wr/wr0/wsh
-wr0/wsh/fh/wr0
-wsh/wr0/wr0/fh
+o/wr/fh/fh
+wr/o/fh/fh
+wr/wr/wr0/fh
+wr/wr/fh/wr0
+w/w/fh/wr
+w/w/wr/fh
+wr/w/fh/fh
+w/wr/fh/fh
+wr/w/fh/wr0
+w/wr/wr0/fh
+
+fh/fh/fh/fh
++
+w/fh/fh/fh
+w/fh/wr/fh
